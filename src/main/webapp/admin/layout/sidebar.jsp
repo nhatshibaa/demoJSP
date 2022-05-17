@@ -21,22 +21,17 @@
                                              aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                         class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Components</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">Entity</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                             aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                        class="hide-menu">Forms </span></a>
+                                             aria-expanded="false"><i class="fa-solid fa-user-secret"></i><span
+                        class="hide-menu">Customers </span></a>
                     <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                        <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                class="hide-menu"> Form Inputs
+                        <li class="sidebar-item"><a href="/admin/customers/create" class="sidebar-link"><span
+                                class="hide-menu"> Create
                                         </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span
-                                class="hide-menu"> Form Grids
-                                        </span></a>
-                        </li>
-                        <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span
-                                class="hide-menu"> Checkboxes &
-                                            Radios
+                        <li class="sidebar-item"><a href="/admin/customers/list" class="sidebar-link"><span
+                                class="hide-menu"> List
                                         </span></a>
                         </li>
                     </ul>
