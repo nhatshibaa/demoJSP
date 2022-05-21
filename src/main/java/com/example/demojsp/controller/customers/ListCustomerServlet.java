@@ -1,4 +1,4 @@
-package com.example.demojsp.controller;
+package com.example.demojsp.controller.customers;
 
 import com.example.demojsp.entity.Customer;
 import com.example.demojsp.model.ICustomer;

@@ -82,7 +82,7 @@ public class MySqlCustomerModel implements ICustomer{
             preparedStatement.setString(2, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String name = resultSet.getString("fullName");
+                String name = resultSet.getString("name");
                 String phone = resultSet.getString("phone");
                 String image = resultSet.getString("image");
                 LocalDateTime dob =

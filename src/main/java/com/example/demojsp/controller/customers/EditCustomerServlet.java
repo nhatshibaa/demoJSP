@@ -1,4 +1,4 @@
-package com.example.demojsp.controller;
+package com.example.demojsp.controller.customers;
 
 import com.example.demojsp.entity.Customer;
 import com.example.demojsp.model.ICustomer;
@@ -50,9 +50,9 @@ public class EditCustomerServlet extends HttpServlet {
             String name = req.getParameter("name");
             String phone = req.getParameter("phone");
             String image = req.getParameter("image");
-            String stringBirthday = req.getParameter("birthday");
+            String stringBirthday = req.getParameter("dob");
             LocalDateTime birthday = DateTimeHelper.convertStringToLocalDateTime(stringBirthday);
-            Customer customer = new Customer(name, phone, image, birthday);
+            Customer customer = new Customer(id, name, phone, image, birthday);
             // validate dữ liệu
             if (iCustomer.update(id, customer) != null) {
                 resp.sendRedirect("/admin/customers/list");
