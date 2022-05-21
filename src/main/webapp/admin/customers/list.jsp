@@ -71,10 +71,8 @@
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Phone</th>
-                                        <th>Image</th>
-                                        <th>DoB</th>
+                                        <th>Date Of Birth</th>
                                         <th>CreatedAt</th>
-                                        <th>UpdatedAt</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -93,16 +91,10 @@
                                             <%=cs.getPhone()%>
                                         </td>
                                         <td>
-                                            <%=cs.getImage()%>
-                                        </td>
-                                        <td>
                                             <%=cs.getDob()%>
                                         </td>
                                         <td>
-                                            <%=cs.getCreatedAt()%>
-                                        </td>
-                                        <td>
-                                            <%=cs.getUpdatedAt()%>
+                                            <%=cs.getJoinedAt()%>
                                         </td>
                                         <td>
                                             <%=cs.getStatus()%>

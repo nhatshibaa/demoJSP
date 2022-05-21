@@ -1,5 +1,8 @@
 package com.example.demojsp.entity;
 
+import com.example.demojsp.util.DateTimeHelper;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Customer {
@@ -19,6 +22,9 @@ public class Customer {
         this.phone = phone;
         this.image = image;
         this.dob = dob;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.status = 1;
     }
 
     public Customer(String id, String name, String phone, String image, LocalDateTime dob) {
@@ -27,12 +33,18 @@ public class Customer {
         this.phone = phone;
         this.image = image;
         this.dob = dob;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.status = 1;
     }
     public Customer() {
         this.id = "";
         this.name = "";
         this.phone = "";
         this.image = "";
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.status = 1;
     }
 
     public Customer(String id, String name, String phone, String image) {
@@ -105,6 +117,12 @@ public class Customer {
     public LocalDateTime getDob() {
         return dob;
     }
+    public String getDobString() {
+        if(this.dob != null){
+            return DateTimeHelper.convertLocalDateTimeToString(this.dob);
+        }
+        return "";
+    }
 
     public void setDob(LocalDateTime dob) {
         this.dob = dob;
@@ -112,6 +130,13 @@ public class Customer {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public String getJoinedAt() {
+        if(this.createdAt != null){
+            return DateTimeHelper.convertLocalDateTimeToString(this.createdAt);
+        }
+        return "";
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

@@ -1,4 +1,4 @@
-package com.example.demojsp.controller;
+package com.example.demojsp.controller.customers;
 
 import com.example.demojsp.entity.Customer;
 import com.example.demojsp.model.ICustomer;
@@ -36,12 +36,9 @@ public class CreateCustomerServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String image = req.getParameter("image");
         String stringBirthday = req.getParameter("dob");
-        Customer customer = new Customer(id, name, phone, image);
-        HashMap<String, String> errors = new HashMap<>();
-        if (stringBirthday != null && stringBirthday.length() > 0) {
-            LocalDateTime birthday = DateTimeHelper.convertStringToLocalDateTime(stringBirthday);
-            customer.setDob(birthday);
-        }
+        LocalDateTime birthday = DateTimeHelper.convertStringToLocalDateTime(stringBirthday);
+        Customer customer = new Customer(id, name, phone, image, birthday);
+        //validate
         if (iCustomer.save(customer) != null) {
             resp.sendRedirect("/admin/customers/list");
         } else {

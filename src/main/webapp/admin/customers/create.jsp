@@ -10,13 +10,9 @@
 <%
     Customer customer = (Customer) request.getAttribute("customer");
     int action = (int) request.getAttribute("action");
-    HashMap<String, String> errors = (HashMap<String, String>) request.getAttribute("errors");
     String url = "/admin/customers/create";
     if (action == 2) {
         url = "/admin/customers/edit";
-    }
-    if (errors == null) {
-        errors = new HashMap<>();
     }
 %>
 <!doctype html>
@@ -69,6 +65,10 @@
                             <div class="basic-form">
                                 <form action="<%=url%>" method="post">
                                     <div class="form-group">
+                                        <input type="text" name="id" class="form-control input-rounded"
+                                               placeholder="ID" value="<%=customer.getId()%>" <%=action == 2 ? "readonly":""%>>
+                                    </div>
+                                    <div class="form-group">
                                         <input type="text" name="name" class="form-control input-rounded"
                                                placeholder="Name" value="<%=customer.getName()%>">
                                     </div>
@@ -80,8 +80,8 @@
                                         <input type="text" name="image" class="form-control input-rounded"
                                                placeholder="Image" value="<%=customer.getImage()%>">
                                     </div>
-                                    <div class="form-group">
-                                        <input type="date" name="birthday"
+                                    <div class="form-group" data-toggle="datetimepicker">
+                                        <input type="date" name="dob"
                                                class="complex-colorpicker form-control input-rounded"
                                                placeholder="Birthday" value="<%=customer.getDob()%>">
                                     </div>
@@ -100,5 +100,12 @@
     <jsp:include page="../layout/footer.jsp"/>
 </div>
 <jsp:include page="../layout/js-page.jsp"/>
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    })
+</script>
 </body>
 </html>
