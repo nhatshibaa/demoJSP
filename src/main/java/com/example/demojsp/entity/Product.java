@@ -1,38 +1,90 @@
 package com.example.demojsp.entity;
 
+import com.example.demojsp.entity.base.BaseEntity;
+import com.example.demojsp.entity.enums.ProductStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Product {
+public class Product extends BaseEntity {
     private String id;
+    private Integer CategoryId;
     private String name;
     private BigDecimal price;
     private String thumbnails;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private int status;
+    private String detail;
+    private ProductStatus status;
 
     public Product() {
+        this.id = "";
+        this.name = "";
+        this.price = BigDecimal.valueOf(0);
+        this.thumbnails = "";
+        this.description = "";
+        this.detail = "";
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+        this.status = ProductStatus.ACTIVE;
     }
 
-    public Product(String id, String name, BigDecimal price, String thumbnails, String description) {
+    public Product(String id, String name, BigDecimal price, String thumbnails, String description, String detail) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.thumbnails = thumbnails;
         this.description = description;
+        this.detail = detail;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+        this.status = ProductStatus.ACTIVE;
     }
 
-    public Product(String id, String name, BigDecimal price, String thumbnails, String description, LocalDateTime createdAt, LocalDateTime updatedAt, int status) {
+    public Product(String id, String name, BigDecimal price, String thumbnails, String description, String detail, ProductStatus status) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.thumbnails = thumbnails;
         this.description = description;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.detail = detail;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
         this.status = status;
+    }
+
+    public Product(String id, String name, BigDecimal price, String thumbnails, String description, String detail, Integer categoryId, ProductStatus status) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.thumbnails = thumbnails;
+        this.description = description;
+        this.detail = detail;
+        CategoryId = categoryId;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+        this.status = status;
+    }
+
+    public Product(String id, String name, String thumbnails, String description, String detail) {
+        this.id = id;
+        this.name = name;
+        this.thumbnails = thumbnails;
+        this.description = description;
+        this.detail = detail;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+    }
+
+    public Product(String id, Integer categoryId, String name, BigDecimal price, String thumbnails, String description, String detail) {
+        this.id = id;
+        CategoryId = categoryId;
+        this.name = name;
+        this.price = price;
+        this.thumbnails = thumbnails;
+        this.description = description;
+        this.detail = detail;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
     }
 
     public String getId() {
@@ -75,27 +127,27 @@ public class Product {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public int getStatus() {
+    public ProductStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(ProductStatus status) {
         this.status = status;
+    }
+
+    public Integer getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        CategoryId = categoryId;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }
