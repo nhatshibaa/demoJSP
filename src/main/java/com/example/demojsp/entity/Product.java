@@ -5,6 +5,7 @@ import com.example.demojsp.entity.enums.ProductStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class Product extends BaseEntity {
     private String id;
@@ -15,6 +16,39 @@ public class Product extends BaseEntity {
     private String description;
     private String detail;
     private ProductStatus status;
+
+    private HashMap<String, String> errors = new HashMap<>();
+
+    public boolean isValid(){
+        checkValidate();
+        return errors.size() == 0;
+    }
+
+    private void checkValidate() {
+        // validate dữ liệu theo kiểu cùi bắp.
+        if (id == null || id.length() == 0) {
+            errors.put("id", "Please enter ID!");
+        }
+        if (name == null || name.length() == 0) {
+            errors.put("name", "Please enter name!");
+        }
+        if (CategoryId == 0) {
+            errors.put("cateId", "Please choose category id!");
+        }
+        if (thumbnails == null || thumbnails.length() == 0) {
+            errors.put("thumbnail", "Please choose thumbnail!");
+        }
+        if (description == null || description.length() == 0) {
+            errors.put("description", "Please enter description!");
+        }
+        if (detail == null || detail.length() == 0) {
+            errors.put("detail", "Please enter detail!");
+        }
+    }
+
+    public HashMap<String, String> getErrors() {
+        return errors;
+    }
 
     public Product() {
         this.id = "";

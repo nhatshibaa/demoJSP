@@ -1,4 +1,7 @@
 package com.example.demojsp.entity.cart;
+import com.example.demojsp.entity.Product;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,10 +12,11 @@ public class ShoppingCart implements ShoppingCartAction{
     private String shipPhone;
     private String shipAddress;
     private String shipNote;
-    private double totalPrice;
+    private BigDecimal totalPrice;
     private HashMap<String, CartItem> items;
 
     public ShoppingCart() {
+        this.items = new HashMap<>();
     }
 
     public int getUserId() {
@@ -55,11 +59,11 @@ public class ShoppingCart implements ShoppingCartAction{
         this.shipNote = shipNote;
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -92,7 +96,7 @@ public class ShoppingCart implements ShoppingCartAction{
             CartItem item = new CartItem();
             item.setProductId(product.getId());
             item.setProductName(product.getName());
-            item.setProductThumbnail(product.getThumbnail());
+            item.setProductThumbnail(product.getThumbnails());
             item.setUnitPrice(product.getPrice());
             item.setQuantity(quantity);
             items.put(product.getId(), item);

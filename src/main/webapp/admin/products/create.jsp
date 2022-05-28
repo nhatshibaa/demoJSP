@@ -18,9 +18,13 @@
         categories = new ArrayList<>();
     }
     int action = (int) request.getAttribute("action");
+    HashMap<String, String> errors = (HashMap<String, String>) request.getAttribute("errors");
     String url = "/admin/products/create";
     if (action == 2) {
         url = "/admin/products/edit";
+    }
+    if(errors == null){
+        errors = new HashMap<>();
     }
 %>
 <!doctype html>
@@ -30,7 +34,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Create Product</title>
     <jsp:include page="../layout/css-page.jsp"/>
     <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
@@ -73,25 +77,28 @@
                             <h4 class="card-title">Form Create</h4>
                             <a href="/admin/products/list/list">Back to list</a>
                             <div class="basic-form">
-                                <form action="<%=url%>" method="post">
+                                <form action="<%=url%>" method="post" name="product-form">
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <strong><label>ID</label></strong>
                                             <input type="text" name="id" class="form-control input-rounded"
                                                    placeholder="ID"
-                                                   value="<%=product.getId()%>" <%=action == 2 ? "readonly":""%>>
+                                                   value="<%=product.getId()%>" <%=action == 2 ? "readonly":""%> >
                                         </div>
                                         <div class="form-group col-6">
                                             <strong><label>Name</label></strong>
                                             <input type="text" name="name" class="form-control"
-                                                   placeholder="Name" value="<%=product.getName()%>">
+                                                   placeholder="Name" value="<%=product.getName()%>" >
+                                            <%if(errors.containsKey("name")){%>
+                                            <span class="text-danger">* <%=errors.get("name")%></span>
+                                            <%}%>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <strong><label>Price</label></strong>
                                             <input type="text" name="price" class="form-control"
-                                                   placeholder="Price" value="<%=product.getPrice()%>">
+                                                   placeholder="Price" value="<%=product.getPrice()%>" required>
                                         </div>
                                         <div class="form-group col-6">
                                             <strong><label>Category</label></strong>
@@ -104,27 +111,35 @@
                                                 </option>
                                                 <%}%>
                                             </select>
+                                            <%if(errors.containsKey("cateId")){%>
+                                            <span class="text-danger">* <%=errors.get("cateId")%></span>
+                                            <%}%>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <strong><label>Thumbnail</label></strong>
                                         <input type="hidden" class="form-control" id="hello" name="thumbnail">
-                                        <button type="button" id="upload_widgetn" class="btn btn-sm btn-primary">Chọn
-                                            ảnh
-                                        </button>
+                                        <button type="button" id="upload_widgetn" class="btn btn-sm btn-primary">Chọn ảnh</button>
                                         <img id="preview-image" style="display: none" src="" alt="" class="img-bordered mt-2" width="200px">
-                                        <%--                                            <input type="text" name="thumbnail" class="form-control input-rounded"--%>
-                                        <%--                                                   placeholder="Thumbnail" value="<%=product.getThumbnails()%>">--%>
+                                        <%if(errors.containsKey("thumbnail")){%>
+                                        <span class="text-danger">* <%=errors.get("thumbnail")%></span>
+                                        <%}%>
                                     </div>
                                     <div class="form-group">
                                         <strong><label>Description</label></strong>
                                         <input type="text" name="description" class="form-control input-rounded"
-                                               placeholder="Description" value="<%=product.getDescription()%>">
+                                               placeholder="Description" value="<%=product.getDescription()%>" >
+                                        <%if(errors.containsKey("description")){%>
+                                        <span class="text-danger">* <%=errors.get("description")%></span>
+                                        <%}%>
                                     </div>
                                     <div class="form-group">
                                         <strong><label>Detail</label></strong>
                                         <textarea name="detail" id="editor1"
                                                   value="<%=product.getDetail()%>"></textarea>
+                                        <%if(errors.containsKey("detail")){%>
+                                        <span class="text-danger">* <%=errors.get("detail")%></span>
+                                        <%}%>
                                     </div>
                                     <div class="text-center">
                                         <input type="submit" class="btn btn-info" value="Save">
@@ -143,25 +158,14 @@
 <jsp:include page="../layout/js-page.jsp"/>
 <script type="text/javascript">
     var myWidget = cloudinary.createUploadWidget({
-            cloudName: 'dcmr49l2j',
-            uploadPreset: 'gqjyapbf'
+            cloudName: 'dm2gtzw6g',
+            uploadPreset: 'dev_deejay2k2'
         }, (error, result) => {
             if (!error && result && result.event === "success") {
-                var inputThumbnail = document.getElementById('hello');
-                var previewdiv = document.getElementById('preview-div');
-                if (inputThumbnail) {
-                    var currentImagevalue = inputThumbnail.value;
-                    if (currentImagevalue.length > 0) {
-                        currentImagevalue += ','
-                    }
-                    currentImagevalue += result.info.secure_url;
-                    inputThumbnail.value = currentImagevalue;
-
-                    previewdiv.innerHTML += `<img src="${result.info.secure_url}" width="150xp">`;
-                    previewdiv.classList.remove('hidden');
-
-
-                }
+                console.log('Done! Here is the image info: ', result.info.secure_url);
+                document.forms['product-form']['thumbnail'].value = result.info.secure_url;
+                document.getElementById('preview-image').src = result.info.secure_url;
+                document.getElementById('preview-image').style.display = "inline-block";
             }
         }
     )
@@ -181,3 +185,16 @@
 </script>
 </body>
 </html>
+<%--var inputThumbnail = document.getElementById('hello');--%>
+<%--var previewdiv = document.getElementById('preview-div');--%>
+<%--if (inputThumbnail) {--%>
+<%--var currentImagevalue = inputThumbnail.value;--%>
+<%--if (currentImagevalue.length > 0) {--%>
+<%--currentImagevalue += ','--%>
+<%--}--%>
+<%--currentImagevalue += result.info.secure_url;--%>
+<%--inputThumbnail.value = currentImagevalue;--%>
+
+<%--previewdiv.innerHTML += `<img src="${result.info.secure_url}" width="150xp">`;--%>
+<%--previewdiv.classList.remove('hidden');--%>
+<%--}--%>

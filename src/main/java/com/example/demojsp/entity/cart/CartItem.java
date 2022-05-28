@@ -1,10 +1,12 @@
 package com.example.demojsp.entity.cart;
 
+import java.math.BigDecimal;
+
 public class CartItem {
     private String productId;
     private String productName;
     private String productThumbnail;
-    private double unitPrice;
+    private BigDecimal unitPrice;
     private int quantity;
 
     public CartItem() {
@@ -34,11 +36,11 @@ public class CartItem {
         this.productThumbnail = productThumbnail;
     }
 
-    public double getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
