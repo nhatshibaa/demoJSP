@@ -1,4 +1,7 @@
-<%--
+<%@ page import="com.example.demojsp.entity.Account" %>
+<%@ page import="com.example.demojsp.entity.Category" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: kaotu
   Date: 5/26/2022
@@ -6,6 +9,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Account account = (Account) request.getAttribute("account");
+    if (account == null) {
+        account = new Account();
+    }
+    List<Category> categories = (List<Category>) request.getAttribute("category");
+    if (categories == null) {
+        categories = new ArrayList<>();
+    }
+    Account currentLogin = (Account) session.getAttribute("currentLogin");
+%>
 <html>
 <head>
     <title>Title</title>
@@ -19,9 +33,9 @@
                 <!-- Begin Header Top Left Area -->
                 <div class="col-lg-3 col-md-4">
                     <div class="header-top-left">
-<%--                        <ul class="phone-wrap">--%>
-<%--                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>--%>
-<%--                        </ul>--%>
+                        <%--                        <ul class="phone-wrap">--%>
+                        <%--                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>--%>
+                        <%--                        </ul>--%>
                     </div>
                 </div>
                 <!-- Header Top Left Area End Here -->
@@ -31,14 +45,20 @@
                         <ul class="ht-menu">
                             <!-- Begin Setting Area -->
                             <li>
-                                <div><span><a href="/login">Login</a></span></div>
-<%--                                <div class="setting ht-setting">--%>
-<%--                                    <ul class="ht-setting-list">--%>
-<%--                                        <li><a href="login-register.html">My Account</a></li>--%>
-<%--                                        <li><a href="checkout.html">Checkout</a></li>--%>
-<%--                                        <li><a href="login-register.html">Sign In</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </div>--%>
+                                <%
+                                    if(currentLogin != null){
+                                %>
+                                <div class="ht-setting-trigger"><span style="font-size: 15px"><%=currentLogin.getUsername()%></span></div>
+                                <div class="setting ht-setting">
+                                    <ul class="ht-setting-list">
+                                        <li><a href="/profile">My Account</a></li>
+                                        <li><a href="/checkout">Checkout</a></li>
+                                        <li><a href="/logout">Logout</a></li>
+                                    </ul>
+                                </div>
+                                <%}else{%>
+                                <div><strong><a href="/login">Login</a></strong></div>
+                                <%}%>
                             </li>
                         </ul>
                     </div>
@@ -55,8 +75,8 @@
                 <!-- Begin Header Logo Area -->
                 <div class="col-lg-3">
                     <div class="logo pb-sm-30 pb-xs-30">
-                        <a href="index.html">
-                            <img src="${pageContext.request.contextPath}/resource/user/images/menu/logo/1.jpg" alt="">
+                        <a href="/home">
+                            <img src="${pageContext.request.contextPath}/resource/user/images/old.png" width="75%">
                         </a>
                     </div>
                 </div>
@@ -66,76 +86,13 @@
                     <!-- Begin Header Middle Searchbox Area -->
                     <form action="#" class="hm-searchbox">
                         <select class="nice-select select-search-category">
-                            <option value="0">All</option>
-                            <option value="10">Laptops</option>
-                            <option value="17">- -  Prime Video</option>
-                            <option value="20">- - - -  All Videos</option>
-                            <option value="21">- - - -  Blouses</option>
-                            <option value="22">- - - -  Evening Dresses</option>
-                            <option value="23">- - - -  Summer Dresses</option>
-                            <option value="24">- - - -  T-shirts</option>
-                            <option value="25">- - - -  Rent or Buy</option>
-                            <option value="26">- - - -  Your Watchlist</option>
-                            <option value="27">- - - -  Watch Anywhere</option>
-                            <option value="28">- - - -  Getting Started</option>
-                            <option value="18">- - - -  Computers</option>
-                            <option value="29">- - - -  More to Explore</option>
-                            <option value="30">- - - -  TV &amp; Video</option>
-                            <option value="31">- - - -  Audio &amp; Theater</option>
-                            <option value="32">- - - -  Camera, Photo </option>
-                            <option value="33">- - - -  Cell Phones</option>
-                            <option value="34">- - - -  Headphones</option>
-                            <option value="35">- - - -  Video Games</option>
-                            <option value="36">- - - -  Wireless Speakers</option>
-                            <option value="19">- - - -  Electronics</option>
-                            <option value="37">- - - -  Amazon Home</option>
-                            <option value="38">- - - -  Kitchen &amp; Dining</option>
-                            <option value="39">- - - -  Furniture</option>
-                            <option value="40">- - - -  Bed &amp; Bath</option>
-                            <option value="41">- - - -  Appliances</option>
-                            <option value="11">TV &amp; Audio</option>
-                            <option value="42">- -  Chamcham</option>
-                            <option value="45">- - - -  Office</option>
-                            <option value="47">- - - -  Gaming</option>
-                            <option value="48">- - - -  Chromebook</option>
-                            <option value="49">- - - -  Refurbished</option>
-                            <option value="50">- - - -  Touchscreen</option>
-                            <option value="51">- - - -  Ultrabooks</option>
-                            <option value="52">- - - -  Blouses</option>
-                            <option value="43">- -  Sanai</option>
-                            <option value="53">- - - -  Hard Drives</option>
-                            <option value="54">- - - -  Graphic Cards</option>
-                            <option value="55">- - - -  Processors (CPU)</option>
-                            <option value="56">- - - -  Memory</option>
-                            <option value="57">- - - -  Motherboards</option>
-                            <option value="58">- - - -  Fans &amp; Cooling</option>
-                            <option value="59">- - - -  CD/DVD Drives</option>
-                            <option value="44">- -  Meito</option>
-                            <option value="60">- - - -  Sound Cards</option>
-                            <option value="61">- - - -  Cases &amp; Towers</option>
-                            <option value="62">- - - -  Casual Dresses</option>
-                            <option value="63">- - - -  Evening Dresses</option>
-                            <option value="64">- - - -  T-shirts</option>
-                            <option value="65">- - - -  Tops</option>
-                            <option value="12">Smartphone</option>
-                            <option value="66">- -  Camera Accessories</option>
-                            <option value="68">- - - -  Octa Core</option>
-                            <option value="69">- - - -  Quad Core</option>
-                            <option value="70">- - - -  Dual Core</option>
-                            <option value="71">- - - -  7.0 Screen</option>
-                            <option value="72">- - - -  9.0 Screen</option>
-                            <option value="73">- - - -  Bags &amp; Cases</option>
-                            <option value="67">- -  XailStation</option>
-                            <option value="74">- - - -  Batteries</option>
-                            <option value="75">- - - -  Microphones</option>
-                            <option value="76">- - - -  Stabilizers</option>
-                            <option value="77">- - - -  Video Tapes</option>
-                            <option value="78">- - - -  Memory Card Readers</option>
-                            <option value="79">- - - -  Tripods</option>
-                            <option value="13">Cameras</option>
-                            <option value="14">headphone</option>
-                            <option value="15">Smartwatch</option>
-                            <option value="16">Accessories</option>
+                            <option value="">All</option>
+                            <%
+                                for (int i = 0; i < categories.size(); i++) {
+                            %>
+                            <option><%=categories.get(i).getName()%>
+                            </option>
+                            <%}%>
                         </select>
                         <input type="text" placeholder="Enter your search key ...">
                         <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -163,7 +120,8 @@
                                     <ul class="minicart-product-list">
                                         <li>
                                             <a href="single-product.html" class="minicart-product-image">
-                                                <img src="${pageContext.request.contextPath}/resource/user/images/product/small-size/5.jpg" alt="cart products">
+                                                <img src="${pageContext.request.contextPath}/resource/user/images/product/small-size/5.jpg"
+                                                     alt="cart products">
                                             </a>
                                             <div class="minicart-product-details">
                                                 <h6><a href="single-product.html">Aenean eu tristique</a></h6>
@@ -175,7 +133,8 @@
                                         </li>
                                         <li>
                                             <a href="single-product.html" class="minicart-product-image">
-                                                <img src="${pageContext.request.contextPath}/resource/user/images/product/small-size/6.jpg" alt="cart products">
+                                                <img src="${pageContext.request.contextPath}/resource/user/images/product/small-size/6.jpg"
+                                                     alt="cart products">
                                             </a>
                                             <div class="minicart-product-details">
                                                 <h6><a href="single-product.html">Aenean eu tristique</a></h6>
@@ -188,7 +147,8 @@
                                     </ul>
                                     <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
                                     <div class="minicart-button">
-                                        <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
+                                        <a href="/shopping-cart"
+                                           class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
                                         <a href="checkout.html" class="li-button li-button-fullwidth">
@@ -211,121 +171,16 @@
     <div class="header-bottom header-sticky d-none d-lg-block d-xl-block">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="padding-left: 300px">
                     <!-- Begin Header Bottom Menu Area -->
                     <div class="hb-menu">
                         <nav>
                             <ul>
                                 <li><a href="/home">Home</a></li>
-                                <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
-                                    <ul class="megamenu hb-megamenu">
-                                        <li><a href="shop-left-sidebar.html">Shop Page Layout</a>
-                                            <ul>
-                                                <li><a href="shop-3-column.html">Shop 3 Column</a></li>
-                                                <li><a href="shop-4-column.html">Shop 4 Column</a></li>
-                                                <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                                <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                                <li><a href="shop-list.html">Shop List</a></li>
-                                                <li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a></li>
-                                                <li><a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="single-product-gallery-left.html">Single Product Style</a>
-                                            <ul>
-                                                <li><a href="single-product-carousel.html">Single Product Carousel</a></li>
-                                                <li><a href="single-product-gallery-left.html">Single Product Gallery Left</a></li>
-                                                <li><a href="single-product-gallery-right.html">Single Product Gallery Right</a></li>
-                                                <li><a href="single-product-tab-style-top.html">Single Product Tab Style Top</a></li>
-                                                <li><a href="single-product-tab-style-left.html">Single Product Tab Style Left</a></li>
-                                                <li><a href="single-product-tab-style-right.html">Single Product Tab Style Right</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="single-product.html">Single Products</a>
-                                            <ul>
-                                                <li><a href="single-product.html">Single Product</a></li>
-                                                <li><a href="single-product-sale.html">Single Product Sale</a></li>
-                                                <li><a href="single-product-group.html">Single Product Group</a></li>
-                                                <li><a href="single-product-normal.html">Single Product Normal</a></li>
-                                                <li><a href="single-product-affiliate.html">Single Product Affiliate</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-holder"><a href="blog-left-sidebar.html">Blog</a>
-                                    <ul class="hb-dropdown">
-                                        <li class="sub-dropdown-holder"><a href="blog-left-sidebar.html">Blog Grid View</a>
-                                            <ul class="hb-dropdown hb-sub-dropdown">
-                                                <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                <li><a href="blog-3-column.html">Blog 3 Column</a></li>
-                                                <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-dropdown-holder"><a href="blog-list-left-sidebar.html">Blog List View</a>
-                                            <ul class="hb-dropdown hb-sub-dropdown">
-                                                <li><a href="blog-list.html">Blog List</a></li>
-                                                <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
-                                                <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-dropdown-holder"><a href="blog-details-left-sidebar.html">Blog Details</a>
-                                            <ul class="hb-dropdown hb-sub-dropdown">
-                                                <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-dropdown-holder"><a href="blog-gallery-format.html">Blog Format</a>
-                                            <ul class="hb-dropdown hb-sub-dropdown">
-                                                <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                                                <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                                                <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="megamenu-static-holder"><a href="index.html">Pages</a>
-                                    <ul class="megamenu hb-megamenu">
-                                        <li><a href="blog-left-sidebar.html">Blog Layouts</a>
-                                            <ul>
-                                                <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                <li><a href="blog-3-column.html">Blog 3 Column</a></li>
-                                                <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
-                                                <li><a href="blog-list.html">Blog List</a></li>
-                                                <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
-                                                <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog-details-left-sidebar.html">Blog Details Pages</a>
-                                            <ul>
-                                                <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                                <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                                                <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                                                <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="index.html">Other Pages</a>
-                                            <ul>
-                                                <li><a href="login-register.html">My Account</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="compare.html">Compare</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="index.html">Other Pages 2</a>
-                                            <ul>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="faq.html">FAQ</a></li>
-                                                <li><a href="404.html">404 Error</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="/shop">Shop</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/about">About Us</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>

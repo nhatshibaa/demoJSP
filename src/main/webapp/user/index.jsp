@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <title>Louis Vuiton - LV</title>
     <jsp:include page="layout/css-page.jsp"/>
 </head>
 <body>
@@ -23,7 +23,7 @@
                                     <h2>Chamcham Galaxy S9 | S9+</h2>
                                     <h3>Starting at <span>$1209.00</span></h3>
                                     <div class="default-btn slide-btn">
-                                        <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                        <a class="links" href="/shop">Shopping Now</a>
                                     </div>
                                 </div>
                             </div>

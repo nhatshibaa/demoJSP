@@ -34,14 +34,29 @@ public class CreateProductServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         // xử lý validate và save.
         String id = req.getParameter("id");
-        Integer categoryId = Integer.parseInt(req.getParameter("categoryId"));
+        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
         String name = req.getParameter("name");
         BigDecimal price =  BigDecimal.valueOf(Long.parseLong(req.getParameter("price")));
         String thumbnails = req.getParameter("thumbnail");
         String description = req.getParameter("description");
         String detail = req.getParameter("detail");
-        Product product = new Product(id, categoryId, name, price, thumbnails, description, detail);
+        Product product = new Product();
+        product.setId(id);
+        product.setName(name);
+        product.setCategoryId(categoryId);
+        product.setThumbnails(thumbnails);
+        product.setDescription(description);
+        product.setDetail(detail);
+        product.setPrice(price);
         //validate
+        if (!product.isValid()) {
+            req.setAttribute("category", iCategory.findAll());
+            req.setAttribute("product", product);
+            req.setAttribute("action", 1);
+            req.setAttribute("errors", product.getErrors());
+            req.getRequestDispatcher("/admin/products/create.jsp").forward(req, resp);
+            return;
+        }
         if (iProduct.save(product) != null) {
             resp.sendRedirect("/admin/products/list");
         } else {

@@ -1,5 +1,7 @@
 package com.example.demojsp.entity.cart;
 
+import com.example.demojsp.entity.Product;
+
 import java.util.ArrayList;
 
 public interface ShoppingCartAction {

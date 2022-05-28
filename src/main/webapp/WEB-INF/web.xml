@@ -12,6 +12,64 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ShopServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.ShopServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShopServlet</servlet-name>
+        <url-pattern>/shop</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BlogServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.BlogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogServlet</servlet-name>
+        <url-pattern>/blog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.ContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AboutServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.AboutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AboutServlet</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+
+    <!--Cart-->
+    <servlet>
+        <servlet-name>AddCartServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.products.AddCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCartServlet</servlet-name>
+        <url-pattern>/product/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DetailServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.DetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DetailServlet</servlet-name>
+        <url-pattern>/product/detail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ShoppingCartServlet</servlet-name>
+        <servlet-class>com.example.demojsp.controller.ShoppingCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShoppingCartServlet</servlet-name>
+        <url-pattern>/shopping-cart</url-pattern>
+    </servlet-mapping>
 
     <!--Customer-->
     <servlet>
